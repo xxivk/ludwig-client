@@ -1,38 +1,16 @@
 input_features:
-  -
-    name: overview
-    type: text
-    level: word
-    encoder: bert
-    tied_weights: null
-    pretrained_model_name_or_path: bert-base-uncased
-    reduce_output: cls_pooled
-    trainable: false
-  -
-    name: genres
-    type: set
-  -
-    name: production_companies
-    type: set
-  -
-    name: production_countries
-    type: set
-  -
-    name: release_year
-    type: numerical
-  -
-    name: user_id
-    type: text
-  -
-    name: movie_id
-    type: text
-
+ -
+  name: text
+  type: category
 output_features:
   -
-    name: rating
-    type: numerical
+    name: confirmed_cases
+    type: category
 
-training:
-  epochs: 10
-  early_stop: 3
+  -
+    name: recovered_cases
+    type: category
 
+  -
+    name: deaths
+    type: category

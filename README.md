@@ -1,4 +1,4 @@
-This repo is for training and prediction projects for ludwig for studying purpose 
+This repo contains projects for training and prediction via ludwig for studying purpose 
 
 this project aims for only Ludwig CLI ( yaml file )
 

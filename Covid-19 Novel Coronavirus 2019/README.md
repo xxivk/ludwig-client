@@ -7,7 +7,8 @@ The virus was first identified in December 2019 in Wuhan, Hubei Province, China.
 To control the spread of the virus, various measures have been implemented globally, including social distancing, wearing masks, hand hygiene, travel restrictions, quarantine and isolation protocols, and vaccination campaigns. Vaccines have been developed and authorized for emergency use in many countries, providing protection against severe illness and reducing the transmission of the virus.
 
 It's important to note that information regarding the novel coronavirus and COVID-19 continues to evolve as scientists and researchers learn more about the virus and its effects. It's crucial to rely on reputable sources such as the WHO and national health agencies for the most up-to-date and accurate information.
+https://www.kaggle.com/datasets/bhanupratapbiswas/covid-19-novel-coronavirus-2019
 
 
-
+ludwig train --dataset "Covid-19 Novel Coronavirus 2019\countries-aggregated_csv.csv" --config "Covid-19 Novel Coronavirus 2019\config.yml" --output_directory "Covid-19 Novel Coronavirus 2019"
 >git push --force origin main
