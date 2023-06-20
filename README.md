@@ -4,3 +4,6 @@ This Train is for 500 movies Rating in netflix  / SST5 with NLP
 \\
 
 #ludwig visualize --visualization learning_curves --training_statistics ratings_sample.meta.json
+
+
+# git push --force origin main
