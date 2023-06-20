@@ -12,11 +12,13 @@ Data set was taken from
 
 >  ludwig predict --dataset <input_dataset> --model_path <model_path> --output_directory <output_directory>
 
+ludwig predict --dataset "Twitter US Airline Sentiment\Tweets.csv" –-model_path "Twitter US Airline Sentiment\results\experiment_run_0\model" --output_directory "Twitter US Airline Sentiment"
 
-> ludwig visualize --visualization learning_curves --training_statistics ratings_sample.meta.json
+
+> ludwig visualize --visualization learning_curves --training_statistics "Twitter US Airline Sentiment\results\experiment_run_0\training_statistics.json"
 
 
 >git push --force origin main
 
 
-ludwig train --dataset "Twitter US Airline Sentiment\Tweets.csv" --config "Twitter US Airline Sentiment\config.yml"
+ludwig train --dataset "Twitter US Airline Sentiment\Tweets.csv" --config "Twitter US Airline Sentiment\config.yml" --output_directory "Twitter US Airline Sentiment\results"
