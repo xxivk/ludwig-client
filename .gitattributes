@@ -1,3 +1,5 @@
 latest.ckpt filter=lfs diff=lfs merge=lfs -text
 *.ckpt filter=lfs diff=lfs merge=lfs -text
+c:/Users/crypto/Desktop/ludwig-client/results/experiment_run_7/model/model_weights filter=lfs diff=lfs merge=lfs -text
 *model_weights filter=lfs diff=lfs merge=lfs -text
+model_weights filter=lfs diff=lfs merge=lfs -text
