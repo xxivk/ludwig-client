@@ -1,0 +1,8 @@
+input_features:
+ -
+  name: text
+  type: text
+output_features:
+ -
+  name: airline_sentiment
+  type: category
