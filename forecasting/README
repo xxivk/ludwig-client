@@ -1,0 +1,9 @@
+https://www.kaggle.com/datasets/selfishgene/historical-hourly-weather-data
+
+ludwig train --config config.yaml --dataset temperature.csv
+
+ludwig train --config config.yaml --dataset preprocessed_data.csv
+
+
+
+ludwig predict  --dataset preprocessed_data.csv --model_path results\experiment_run_1\model --output_directory "output"
