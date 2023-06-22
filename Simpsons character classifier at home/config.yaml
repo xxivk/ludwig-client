@@ -1,0 +1,39 @@
+input_features:
+  -
+    name: image_name
+    type: image
+    encoder: resnet
+    preprocessing:
+      resize_method: interpolate
+      width: 128
+      height: 128
+    encoder_options:
+      split_folders: True
+
+
+output_features:
+  -
+    name: label
+    type: category
+
+training:
+  batch_size: 2
+  epochs: 3
+
+dataset:
+  name: simpsons_dataset
+  type: image
+  images_path: Simpsons character classifier at home/simpsons_dataset
+  image_filename: image_name
+  label: label
+  preprocessing:
+    resize_method: interpolate
+    width: 128
+    height: 128
+  csv:
+    file_path: Simpsons character classifier at home/simpsons_dataset.csv
+    image_path_column: image_name
+    label_column: label
+  encoder: resnet
+  encoder_options:
+    split_folders: True

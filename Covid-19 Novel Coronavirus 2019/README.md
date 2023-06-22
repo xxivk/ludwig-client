@@ -12,3 +12,10 @@ https://www.kaggle.com/datasets/bhanupratapbiswas/covid-19-novel-coronavirus-201
 
 ludwig train --dataset "Covid-19 Novel Coronavirus 2019\countries-aggregated_csv.csv" --config "Covid-19 Novel Coronavirus 2019\config.yml" --output_directory "Covid-19 Novel Coronavirus 2019"
 >git push --force origin main
+
+ludwig train --dataset "dataset_train.csv" --config "config.yml"
+
+# ludwig predict --dataset "dataset_train.csv" --model_path "results\experiment_run_2\model" --output_directory "Predict"
+
+# ludwig visualize --visualization learning_curves --training_statistics results\experiment_run_2\training_statistics.json
+
