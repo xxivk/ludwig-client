@@ -1,15 +1,15 @@
 input_features:
-  - name: datetime
+  - name: DateIndex
     type: date
     format: 'yyyy-MM-dd HH:mm:ss'
 
-  - name: Seattle
-    type: numerical
+  - name: Close
+    type: timeseries
 
 output_features:
-  - name: Seattle_next
+  - name: Close_next
     type: numerical
-    column: Seattle
+    column: Close
     preprocessing:
       horizon: 2
 

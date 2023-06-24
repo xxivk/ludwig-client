@@ -1,0 +1,13 @@
+ludwig train --config "train with ray\config.yaml" --dataset "train with ray\ratings_sample.csv"
+
+
+ludwig evaluate --model path/to/trained/model --dataset heldout.csv
+
+
+ludwig visualize --visualization compare_performance --test_statistics path/to/test_statistics_model_1.json path/to/test_statistics_model_2.json
+
+
+ludwig predict  --dataset preprocessed_data.csv --model_path results\experiment_run_1\model --output_directory "output"
+
+
+ludwig train --config config.yaml --dataset ratings_sample.csv
