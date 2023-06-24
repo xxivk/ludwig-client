@@ -36,7 +36,6 @@ input_features:
   - name: DateIndex
     type: date
     format: 'yyyy-MM-dd HH:mm:ss'
-
   - name: Close
     type: timeseries
 
@@ -59,16 +58,6 @@ model:
     - units: 32
       activation: relu
 
-loss: mean_squared_error
-
-optimizer:
-  type: adam
-  learning_rate: 0.001
-
-metrics:
-  - mean_squared_error
-  - mean_absolute_error
-
 training:
   epochs: 10
 
@@ -83,3 +72,12 @@ training_data:
       Close:
         missing_value_strategy: fill_with_const
         fill_value: 0
+
+output_directory: 'model'
+
+callbacks:
+  - early_stopping:
+      type: improvement
+      metric: val_loss
+      threshold: 0
+      early_stopping_criteria: less
