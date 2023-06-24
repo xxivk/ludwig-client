@@ -1,0 +1,10 @@
+ludwig train --config config.yaml --dataset test_data.csv
+ludwig experiment --dataset test_data.csv --output_directory output
+
+ludwig experiment --data_csv test_data.csv --output_directory output
+
+
+ludwig config --dataset 'C:\Users\crypto\Desktop\ludwig-client\Ahmad train\test_data.csv' --output_directory 'C:\Users\crypto\Desktop\ludwig-client\Ahmad train'
+
+
+git push --force origin main
