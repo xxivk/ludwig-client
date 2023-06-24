@@ -1,3 +1,37 @@
+#input_features:
+#  - name: DateIndex
+#    type: date
+#    format: 'yyyy-MM-dd HH:mm:ss'
+#
+#  - name: Close
+#    type: timeseries
+#
+#output_features:
+#  - name: Close_next
+#    type: numerical
+#    column: Close
+#    preprocessing:
+#      horizon: 2
+#
+#combiner:
+#  type: concat
+#  flatten_inputs: true
+#
+#training:
+#  epochs: 10
+#
+#training_data:
+#  file: 'test_data.csv'
+#  preprocessing:
+#    categorical_features_preprocessing:
+#      datetime:
+#        missing_value_strategy: fill_with_const
+#        fill_value: '1970-01-01 00:00:00'
+#    numerical_features_preprocessing:
+#      Close:
+#        missing_value_strategy: fill_with_const
+#        fill_value: 0
+#
 input_features:
   - name: DateIndex
     type: date
@@ -17,6 +51,24 @@ combiner:
   type: concat
   flatten_inputs: true
 
+model:
+  type: lstm
+  layers:
+    - units: 64
+      activation: relu
+    - units: 32
+      activation: relu
+
+loss: mean_squared_error
+
+optimizer:
+  type: adam
+  learning_rate: 0.001
+
+metrics:
+  - mean_squared_error
+  - mean_absolute_error
+
 training:
   epochs: 10
 
@@ -28,6 +80,6 @@ training_data:
         missing_value_strategy: fill_with_const
         fill_value: '1970-01-01 00:00:00'
     numerical_features_preprocessing:
-      Seattle:
+      Close:
         missing_value_strategy: fill_with_const
         fill_value: 0
