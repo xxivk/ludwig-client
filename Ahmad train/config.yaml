@@ -32,52 +32,1177 @@
 #        missing_value_strategy: fill_with_const
 #        fill_value: 0
 #
+#!#######################################
+
+#input_features:
+#  - name: DateIndex
+#    type: date
+#    format: 'yyyy-MM-dd HH:mm:ss'
+#  - name: Close
+#    type: timeseries
+#
+#output_features:
+#  - name: Close_next
+#    type: numerical
+#    column: Close
+#    preprocessing:
+#      horizon: 2
+#
+#combiner:
+#  type: concat
+#  flatten_inputs: true
+#
+#model:
+#  type: lstm
+#  layers:
+#    - units: 64
+#      activation: relu
+#    - units: 32
+#      activation: relu
+#
+#training:
+#  epochs: 10
+#
+#training_data:
+#  file: 'test_data.csv'
+#  preprocessing:
+#    categorical_features_preprocessing:
+#      datetime:
+#        missing_value_strategy: fill_with_const
+#        fill_value: '1970-01-01 00:00:00'
+#    numerical_features_preprocessing:
+#      Close:
+#        missing_value_strategy: fill_with_const
+#        fill_value: 0
+#
+#output_directory: 'model'
+#
+#callbacks:
+#  - early_stopping:
+#      type: improvement
+#      metric: val_loss
+#      threshold: 0
+#      early_stopping_criteria: less
+#
 input_features:
   - name: DateIndex
-    type: date
-    format: 'yyyy-MM-dd HH:mm:ss'
+    type: date # Bro date is not text :) is date 
+    format: 'yyyy-MM-dd HH:mm:ss' # you need to add your data format as it is in CSV 
   - name: Close
     type: timeseries
+  - name: Open
+    type: numerical
+  - name: High
+    type: numerical
+  - name: Low
+    type: numerical
+  - name: Volume
+    type: numerical
+  - name: timeStamp
+    type: numerical
+  - name: tradesCount
+    type: numerical
+  - name: quoteVolume
+    type: numerical
+  - name: Date
+    type: date  #aww bro what we said about date ? :)
+  - name: returns
+    type: numerical
+  - name: self_benchmark_returns
+    type: numerical
+  - name: HODL
+    type: numerical
+  - name: dates_grouped_by_day
+    type: text
+  - name: session_vwap
+    type: numerical
+  - name: session_vscore
+    type: numerical
+  - name: session_vwap_STDEV_0.25
+    type: numerical
+  - name: session_vwap_STDEV_N0.25
+    type: numerical
+  - name: session_vwap_STDEV_0.5
+    type: numerical
+  - name: session_vwap_STDEV_N0.5
+    type: numerical
+  - name: session_vwap_STDEV_1
+    type: numerical
+  - name: session_vwap_STDEV_N1
+    type: numerical
+  - name: session_vwap_STDEV_1.5
+    type: numerical
+  - name: session_vwap_STDEV_N1.5
+    type: numerical
+  - name: session_vwap_STDEV_2
+    type: numerical
+  - name: session_vwap_STDEV_N2
+    type: numerical
+  - name: session_vwap_STDEV_2.5
+    type: numerical
+  - name: session_vwap_STDEV_N2.5
+    type: numerical
+  - name: session_vwap_STDEV_3
+    type: numerical
+  - name: session_vwap_STDEV_N3
+    type: numerical
+  - name: session_vwap_STDEV_3.5
+    type: numerical
+  - name: session_vwap_STDEV_N3.5
+    type: numerical
+  - name: session_vwap_thrust
+    type: numerical
+  - name: session_vscore_max
+    type: numerical
+  - name: session_vscore_max_price
+    type: numerical
+  - name: session_vscore_max_changed
+    type: text
+  - name: lightspeed_session_vscore
+    type: numerical
+  - name: prev_session_vwap
+    type: numerical
+  - name: pre_panic_high
+    type: numerical
+  - name: pre_panic_high_chart
+    type: numerical
+  - name: panic_quarter_high
+    type: numerical
+  - name: panic_high
+    type: numerical   #!
+  - name: panic_high_mean
+    type: numerical
+  - name: panic_high_chart
+    type: numerical
+  - name: panic_high_lower_band
+    type: numerical
+  - name: PANIC_STDEV_0.5
+    type: numerical
+  - name: PANIC_STDEV_N0.5
+    type: numerical
+  - name: PANIC_STDEV_1
+    type: numerical
+  - name: PANIC_STDEV_N1
+    type: numerical
+  - name: PANIC_STDEV_N1_5
+    type: numerical
+  - name: PANIC_STDEV_N2
+    type: numerical
+  - name: PANIC_STDEV_N2_5
+    type: numerical
+  - name: PANIC_STDEV_N3
+    type: numerical
+  - name: after_panic_high_return
+    type: numerical
+  - name: after_panic_high_return.max
+    type: numerical
+  - name: after_panic_high_return.worst
+    type: numerical
+  - name: pre_market_volume
+    type: numerical
+  - name: pre_market_return
+    type: numerical
+  - name: panic_market_volume
+    type: numerical
+  - name: panic_market_return
+    type: numerical
+  - name: open_market_volume
+    type: numerical
+  - name: open_market_return
+    type: numerical
+  - name: post_market_volume
+    type: numerical
+  - name: pre_market_zone
+    type: text
+  - name: panic_market_zone
+    type: text
+  - name: open_market_zone
+    type: text
+  - name: lunch_break_zone
+    type: text
+  - name: end_of_day_zone
+    type: text
+  - name: post_market_zone
+    type: text
+  - name: tc
+    type: numerical
+  - name: session_tps
+    type: numerical
+  - name: session_tpswap
+    type: numerical
+  - name: buy_session_tps
+    type: numerical
+  - name: session_tps_inflow
+    type: numerical
+  - name: sell_session_tps
+    type: numerical
+  - name: session_tps_outflow
+    type: numerical
+  - name: session_tps_netflow
+    type: numerical
+  - name: qv
+    type: numerical
+  - name: session_qv_dollar
+    type: numerical
+  - name: session_inflow
+    type: numerical
+  - name: session_outflow
+    type: numerical
+  - name: session_netflow
+    type: numerical
+  - name: session_inflow_relative_to_outflow
+    type: numerical
+  - name: prev_session_inflow_relative_to_outflow
+    type: numerical
+  - name: daily_return
+    type: numerical
+  - name: gap_return
+    type: numerical
+  - name: dates_grouped_by_week
+    type: text
+  - name: weekly_vwap
+    type: numerical
+  - name: weekly_vscore
+    type: numerical
+  - name: W_STDEV_1
+    type: numerical
+  - name: W_STDEV_N1
+    type: numerical
+  - name: prev_weekly_vwap
+    type: numerical
+  - name: weekly_return
+    type: numerical
+  - name: vwap1
+    type: numerical
+  - name: vwap5
+    type: numerical
+  - name: vscore5 # !the bug is here its contains NAN values
+    type: numerical
+  - name: wm5
+    type: numerical
+  - name: vwap10
+    type: numerical
+  - name: vscore10
+    type: numerical
+  - name: wm10
+    type: numerical
+  - name: vwap15
+    type: numerical
+  - name: vscore15
+    type: numerical
+  - name: wm15
+    type: numerical
+  - name: vwap21
+    type: numerical
+  - name: vscore21
+    type: numerical
+  - name: wm21
+    type: numerical
+  - name: vwap24
+    type: numerical
+  - name: vscore24
+    type: numerical
+  - name: wm24
+    type: numerical
+  - name: vwap30
+    type: numerical
+  - name: vscore30
+    type: numerical
+  - name: wm30
+    type: numerical
+  - name: vwap48
+    type: numerical
+  - name: vscore48
+    type: numerical
+  - name: wm48
+    type: numerical
+  - name: vwap84
+    type: numerical
+  - name: vscore84
+    type: numerical
+  - name: wm84
+    type: numerical
+  - name: vwap111
+    type: numerical
+  - name: vscore111
+    type: numerical
+  - name: wm111
+    type: numerical
+  - name: vwap175
+    type: numerical
+  - name: vscore175
+    type: numerical
+  - name: wm175
+    type: numerical
+  - name: tcwap
+    type: numerical
+  - name: tps1
+    type: numerical
+  - name: tps1_std
+    type: numerical
+  - name: tps1_relative_5days
+    type: numerical
+  - name: tps1_up_threshold
+    type: numerical
+  - name: tps1_surge
+    type: numerical
+  - name: tps1wap
+    type: numerical
+  - name: tvc
+    type: numerical
+  - name: vwatps1
+    type: numerical
+  - name: tps5
+    type: numerical
+  - name: tps5_std
+    type: numerical
+  - name: tps5_relative_5days
+    type: numerical
+  - name: tps5_up_threshold
+    type: numerical
+  - name: tps5_surge
+    type: numerical
+  - name: tps5wap #! here the bug
+    type: numerical
+  - name: vwatps5
+    type: numerical
+  - name: tps10
+    type: numerical
+  - name: tps10_std
+    type: numerical
+  - name: tps10_relative_5days
+    type: numerical
+  - name: tps10_up_threshold
+    type: numerical
+  - name: tps10_surge
+    type: numerical
+  - name: tps10wap
+    type: numerical
+  - name: vwatps10
+    type: numerical
+  - name: tps15
+    type: numerical
+  - name: tps15_std
+    type: numerical
+  - name: tps15_relative_5days
+    type: numerical
+  - name: tps15_up_threshold
+    type: numerical
+  - name: tps15_surge
+    type: numerical
+  - name: tps15wap
+    type: numerical
+  - name: vwatps15
+    type: numerical
+  - name: tps21
+    type: numerical
+  - name: tps21_std
+    type: numerical
+  - name: tps21_relative_5days
+    type: numerical
+  - name: tps21_up_threshold
+    type: numerical
+  - name: tps21_surge
+    type: numerical
+  - name: tps21wap
+    type: numerical
+  - name: vwatps21
+    type: numerical
+  - name: tps24
+    type: numerical
+  - name: tps24_std
+    type: numerical
+  - name: tps24_relative_5days
+    type: numerical
+  - name: tps24_up_threshold
+    type: numerical
+  - name: tps24_surge
+    type: numerical
+  - name: tps24wap
+    type: numerical
+  - name: vwatps24
+    type: numerical
+  - name: tps30
+    type: numerical
+  - name: tps30_std
+    type: numerical
+  - name: tps30_relative_5days
+    type: numerical
+  - name: tps30_up_threshold
+    type: numerical
+  - name: tps30_surge
+    type: numerical
+  - name: tps30wap
+    type: numerical
+  - name: vwatps30
+    type: numerical
+  - name: tps48
+    type: numerical
+  - name: tps48_std
+    type: numerical
+  - name: tps48_relative_5days
+    type: numerical
+  - name: tps48_up_threshold
+    type: numerical
+  - name: tps48_surge
+    type: numerical
+  - name: tps48wap
+    type: numerical
+  - name: vwatps48
+    type: numerical
+  - name: tps84
+    type: numerical
+  - name: tps84_std
+    type: numerical
+  - name: tps84_relative_5days
+    type: numerical
+  - name: tps84_up_threshold
+    type: numerical
+  - name: tps84_surge
+    type: numerical
+  - name: tps84wap
+    type: numerical
+  - name: vwatps84
+    type: numerical
+  - name: tps111
+    type: numerical
+  - name: tps111_std
+    type: numerical
+  - name: tps111_relative_5days
+    type: numerical
+  - name: tps111_up_threshold
+    type: numerical
+  - name: tps111_surge
+    type: numerical
+  - name: tps111wap
+    type: numerical
+  - name: vwatps111
+    type: numerical
+  - name: tps175
+    type: numerical
+  - name: tps175_std
+    type: numerical
+  - name: tps175_relative_5days
+    type: numerical
+  - name: tps175_up_threshold
+    type: numerical
+  - name: tps175_surge
+    type: numerical
+  - name: tps175wap
+    type: numerical
+  - name: vwatps175
+    type: numerical
+  - name: lightspeed_vscore1_50
+    type: numerical
+  - name: tps1_upper
+    type: numerical
+  - name: tps1_max
+    type: numerical
+  - name: tps1_max_price
+    type: numerical
+  - name: tps1_max_changed
+    type: binary
+  - name: lightspeed_tps1
+    type: numerical
+  - name: lightspeed_vscore1_100
+    type: numerical
+  - name: lightspeed_vscore1_200
+    type: numerical
+  - name: vscore5_50_min
+    type: numerical
+  - name: vscore5_50_min_price
+    type: numerical
+  - name: vscore5_50_min_changed
+    type: binary
+  - name: _vscore5_50_min_price
+    type: numerical
+  - name: lightspeed_vscore5_50
+    type: numerical
+  - name: tps5_upper
+    type: numerical
+  - name: tps5_max
+    type: numerical
+  - name: tps5_max_price
+    type: numerical
+  - name: tps5_max_changed
+    type: binary
+  - name: lightspeed_tps5
+    type: numerical
+  - name: vscore5_100_min
+    type: numerical
+  - name: vscore5_100_min_price
+    type: numerical
+  - name: vscore5_100_min_changed
+    type: binary
+  - name: _vscore5_100_min_price
+    type: numerical
+  - name: lightspeed_vscore5_100
+    type: numerical
+  - name: vscore5_200_min
+    type: numerical
+  - name: vscore5_200_min_price
+    type: numerical
+  - name: vscore5_200_min_changed
+    type: binary
+  - name: _vscore5_200_min_price
+    type: numerical
+  - name: lightspeed_vscore5_200
+    type: numerical
+  - name: vscore10_50_max
+    type: numerical
+  - name: vscore10_50_min
+    type: numerical
+  - name: vscore10_50_max_price
+    type: numerical
+  - name: vscore10_50_min_price
+    type: numerical
+  - name: vscore10_50_max_changed
+    type: binary
+  - name: vscore10_50_min_changed
+    type: binary
+  - name: _vscore10_50_max_price
+    type: numerical
+  - name: _vscore10_50_min_price
+    type: numerical
+  - name: lightspeed_vscore10_50
+    type: numerical
+  - name: tps10_upper
+    type: numerical
+  - name: tps10_max
+    type: numerical
+  - name: tps10_max_price
+    type: numerical
+  - name: tps10_max_changed
+    type: binary
+  - name: lightspeed_tps10
+    type: numerical
+  - name: vscore10_100_max
+    type: numerical
+  - name: vscore10_100_min
+    type: numerical
+  - name: vscore10_100_max_price
+    type: numerical
+  - name: vscore10_100_min_price
+    type: numerical
+  - name: vscore10_100_max_changed
+    type: binary
+  - name: vscore10_100_min_changed
+    type: binary
+  - name: _vscore10_100_max_price
+    type: numerical
+  - name: _vscore10_100_min_price
+    type: numerical
+  - name: lightspeed_vscore10_100
+    type: numerical
+  - name: vscore10_200_max
+    type: numerical
+  - name: vscore10_200_min
+    type: numerical
+  - name: vscore10_200_max_price
+    type: numerical
+  - name: vscore10_200_min_price
+    type: numerical
+  - name: vscore10_200_max_changed
+    type: binary
+  - name: vscore10_200_min_changed
+    type: binary
+  - name: _vscore10_200_max_price
+    type: numerical
+  - name: _vscore10_200_min_price
+    type: numerical
+  - name: lightspeed_vscore10_200
+    type: numerical
+  - name: vscore15_50_max
+    type: numerical
+  - name: vscore15_50_min
+    type: numerical
+  - name: vscore15_50_max_price
+    type: numerical
+  - name: vscore15_50_min_price
+    type: numerical
+  - name: vscore15_50_max_changed
+    type: binary
+  - name: vscore15_50_min_changed
+    type: binary
+  - name: _vscore15_50_max_price
+    type: numerical
+  - name: _vscore15_50_min_price
+    type: numerical
+  - name: lightspeed_vscore15_50
+    type: numerical
+  - name: tps15_upper
+    type: numerical
+  - name: tps15_max
+    type: numerical
+  - name: tps15_max_price
+    type: numerical
+  - name: tps15_max_changed
+    type: binary
+  - name: lightspeed_tps15
+    type: numerical
+  - name: vscore15_100_max
+    type: numerical
+  - name: vscore15_100_min
+    type: numerical
+  - name: vscore15_100_max_price
+    type: numerical
+  - name: vscore15_100_min_price
+    type: numerical
+  - name: vscore15_100_max_changed
+    type: binary
+  - name: vscore15_100_min_changed
+    type: binary
+  - name: _vscore15_100_max_price
+    type: numerical
+  - name: _vscore15_100_min_price
+    type: numerical
+  - name: lightspeed_vscore15_100
+    type: numerical
+  - name: vscore15_200_max
+    type: numerical
+  - name: vscore15_200_min
+    type: numerical
+  - name: vscore15_200_max_price
+    type: numerical
+  - name: vscore15_200_min_price
+    type: numerical
+  - name: vscore15_200_max_changed
+    type: binary
+  - name: vscore15_200_min_changed
+    type: binary
+  - name: _vscore15_200_max_price
+    type: numerical
+  - name: _vscore15_200_min_price
+    type: numerical
+  - name: lightspeed_vscore15_200
+    type: numerical
+  - name: vscore21_50_max
+    type: numerical
+  - name: vscore21_50_min
+    type: numerical
+  - name: vscore21_50_max_price
+    type: numerical
+  - name: vscore21_50_min_price
+    type: numerical
+  - name: vscore21_50_max_changed
+    type: binary
+  - name: vscore21_50_min_changed
+    type: binary
+  - name: _vscore21_50_max_price
+    type: numerical
+  - name: _vscore21_50_min_price
+    type: numerical
+  - name: lightspeed_vscore21_50
+    type: numerical
+  - name: tps21_upper
+    type: numerical
+  - name: tps21_max
+    type: numerical
+  - name: tps21_max_price
+    type: numerical
+  - name: tps21_max_changed
+    type: binary
+  - name: lightspeed_tps21
+    type: numerical
+  - name: vscore21_100_max
+    type: numerical
+  - name: vscore21_100_min
+    type: numerical
+  - name: vscore21_100_max_price
+    type: numerical
+  - name: vscore21_100_min_price
+    type: numerical
+  - name: vscore21_100_max_changed
+    type: binary
+  - name: vscore21_100_min_changed
+    type: binary
+  - name: _vscore21_100_max_price
+    type: numerical
+  - name: _vscore21_100_min_price
+    type: numerical
+  - name: lightspeed_vscore21_100
+    type: numerical
+  - name: vscore21_200_max
+    type: numerical
+  - name: vscore21_200_min
+    type: numerical
+  - name: vscore21_200_max_price
+    type: numerical
+  - name: vscore21_200_min_price
+    type: numerical
+  - name: vscore21_200_max_changed
+    type: binary
+  - name: vscore21_200_min_changed
+    type: binary
+  - name: _vscore21_200_max_price
+    type: numerical
+  - name: _vscore21_200_min_price
+    type: numerical
+  - name: lightspeed_vscore21_200
+    type: numerical
+  - name: vscore24_50_max
+    type: numerical
+  - name: vscore24_50_min
+    type: numerical
+  - name: vscore24_50_max_price
+    type: numerical
+  - name: vscore24_50_min_price
+    type: numerical
+  - name: vscore24_50_max_changed
+    type: binary
+  - name: vscore24_50_min_changed
+    type: binary
+  - name: _vscore24_50_max_price
+    type: numerical
+  - name: _vscore24_50_min_price
+    type: numerical
+  - name: lightspeed_vscore24_50
+    type: numerical
+  - name: tps24_upper
+    type: numerical
+  - name: tps24_max
+    type: numerical
+  - name: tps24_max_price
+    type: numerical
+  - name: tps24_max_changed
+    type: binary
+  - name: lightspeed_tps24
+    type: numerical
+  - name: vscore24_100_max
+    type: numerical
+  - name: vscore24_100_min
+    type: numerical
+  - name: vscore24_100_max_price
+    type: numerical
+  - name: vscore24_100_min_price
+    type: numerical
+  - name: vscore24_100_max_changed
+    type: binary
+  - name: vscore24_100_min_changed
+    type: binary
+  - name: _vscore24_100_max_price
+    type: numerical
+  - name: _vscore24_100_min_price
+    type: numerical
+  - name: lightspeed_vscore24_100
+    type: numerical
+  - name: vscore24_200_max
+    type: numerical
+  - name: vscore24_200_min
+    type: numerical
+  - name: vscore24_200_max_price
+    type: numerical
+  - name: vscore24_200_min_price
+    type: numerical
+  - name: vscore24_200_max_changed
+    type: binary
+  - name: vscore24_200_min_changed
+    type: binary
+  - name: _vscore24_200_max_price
+    type: numerical
+  - name: _vscore24_200_min_price
+    type: numerical
+  - name: lightspeed_vscore24_200
+    type: numerical
+  - name: vscore30_50_max
+    type: numerical
+  - name: vscore30_50_min
+    type: numerical
+  - name: vscore30_50_max_price
+    type: numerical
+  - name: vscore30_50_min_price
+    type: numerical
+  - name: vscore30_50_max_changed
+    type: binary
+  - name: vscore30_50_min_changed
+    type: binary
+  - name: _vscore30_50_max_price
+    type: numerical
+  - name: _vscore30_50_min_price
+    type: numerical
+  - name: lightspeed_vscore30_50
+    type: numerical
+  - name: tps30_upper
+    type: numerical
+  - name: tps30_max
+    type: numerical
+  - name: tps30_max_price
+    type: numerical
+  - name: tps30_max_changed
+    type: binary
+  - name: lightspeed_tps30
+    type: numerical
+  - name: vscore30_100_max
+    type: numerical
+  - name: vscore30_100_min
+    type: numerical
+  - name: vscore30_100_max_price
+    type: numerical
+  - name: vscore30_100_min_price
+    type: numerical
+  - name: vscore30_100_max_changed
+    type: binary
+  - name: vscore30_100_min_changed
+    type: binary
+  - name: _vscore30_100_max_price
+    type: numerical
+  - name: _vscore30_100_min_price
+    type: numerical
+  - name: lightspeed_vscore30_100
+    type: numerical
+  - name: vscore30_200_max
+    type: numerical
+  - name: vscore30_200_min
+    type: numerical
+  - name: vscore30_200_max_price
+    type: numerical
+  - name: vscore30_200_min_price
+    type: numerical
+  - name: vscore30_200_max_changed
+    type: binary
+  - name: vscore30_200_min_changed
+    type: binary
+  - name: _vscore30_200_max_price
+    type: numerical
+  - name: _vscore30_200_min_price
+    type: numerical
+  - name: lightspeed_vscore30_200
+    type: numerical
+  - name: vscore48_50_max
+    type: numerical
+  - name: vscore48_50_min
+    type: numerical
+  - name: vscore48_50_max_price
+    type: numerical
+  - name: vscore48_50_min_price
+    type: numerical
+  - name: vscore48_50_max_changed
+    type: binary
+  - name: vscore48_50_min_changed
+    type: binary
+  - name: _vscore48_50_max_price
+    type: numerical
+  - name: _vscore48_50_min_price
+    type: numerical
+  - name: lightspeed_vscore48_50
+    type: numerical
+  - name: tps48_upper
+    type: numerical
+  - name: tps48_max
+    type: numerical
+  - name: tps48_max_price
+    type: numerical
+  - name: tps48_max_changed
+    type: binary
+  - name: lightspeed_tps48
+    type: numerical
+  - name: vscore48_100_max
+    type: numerical
+  - name: vscore48_100_min
+    type: numerical
+  - name: vscore48_100_max_price
+    type: numerical
+  - name: vscore48_100_min_price
+    type: numerical
+  - name: vscore48_100_max_changed
+    type: binary
+  - name: vscore48_100_min_changed
+    type: binary
+  - name: _vscore48_100_max_price
+    type: numerical
+  - name: _vscore48_100_min_price
+    type: numerical
+  - name: lightspeed_vscore48_100
+    type: numerical
+  - name: vscore48_200_max
+    type: numerical
+  - name: vscore48_200_min
+    type: numerical
+  - name: vscore48_200_max_price
+    type: numerical
+  - name: vscore48_200_min_price
+    type: numerical
+  - name: vscore48_200_max_changed
+    type: binary
+  - name: vscore48_200_min_changed
+    type: binary
+  - name: _vscore48_200_max_price
+    type: numerical
+  - name: _vscore48_200_min_price
+    type: numerical
+  - name: lightspeed_vscore48_200
+    type: numerical
+  - name: vscore84_50_max
+    type: numerical
+  - name: vscore84_50_min
+    type: numerical
+  - name: vscore84_50_max_price
+    type: numerical
+  - name: vscore84_50_min_price
+    type: numerical
+  - name: vscore84_50_max_changed
+    type: binary
+  - name: vscore84_50_min_changed
+    type: binary
+  - name: _vscore84_50_max_price
+    type: numerical
+  - name: _vscore84_50_min_price
+    type: numerical
+  - name: lightspeed_vscore84_50
+    type: numerical
+  - name: tps84_upper
+    type: numerical
+  - name: tps84_max
+    type: numerical
+  - name: tps84_max_price
+    type: numerical
+  - name: tps84_max_changed
+    type: binary
+  - name: lightspeed_tps84
+    type: numerical
+  - name: vscore84_100_max
+    type: numerical
+  - name: vscore84_100_min
+    type: numerical
+  - name: vscore84_100_max_price
+    type: numerical
+  - name: vscore84_100_min_price
+    type: numerical
+  - name: vscore84_100_max_changed
+    type: binary
+  - name: vscore84_100_min_changed
+    type: binary
+  - name: _vscore84_100_max_price
+    type: numerical
+  - name: _vscore84_100_min_price
+    type: numerical
+  - name: lightspeed_vscore84_100
+    type: numerical
+  - name: vscore84_200_max
+    type: numerical
+  - name: vscore84_200_min
+    type: numerical
+  - name: vscore84_200_max_price
+    type: numerical
+  - name: vscore84_200_min_price
+    type: numerical
+  - name: vscore84_200_max_changed
+    type: binary
+  - name: vscore84_200_min_changed
+    type: binary
+  - name: _vscore84_200_max_price
+    type: numerical
+  - name: _vscore84_200_min_price
+    type: numerical
+  - name: lightspeed_vscore84_200
+    type: numerical
+  - name: vscore111_50_max
+    type: numerical
+  - name: vscore111_50_min
+    type: numerical
+  - name: vscore111_50_max_price
+    type: numerical
+  - name: vscore111_50_min_price
+    type: numerical
+  - name: vscore111_50_max_changed
+    type: binary
+  - name: vscore111_50_min_changed
+    type: binary
+  - name: _vscore111_50_max_price
+    type: numerical
+  - name: _vscore111_50_min_price
+    type: numerical
+  - name: lightspeed_vscore111_50
+    type: numerical
+  - name: tps111_upper
+    type: numerical
+  - name: tps111_max
+    type: numerical
+  - name: tps111_max_price
+    type: numerical
+  - name: tps111_max_changed
+    type: binary
+  - name: lightspeed_tps111
+    type: numerical
+  - name: vscore111_100_max
+    type: numerical
+  - name: vscore111_100_min
+    type: numerical
+  - name: vscore111_100_max_price
+    type: numerical
+  - name: vscore111_100_min_price
+    type: numerical
+  - name: vscore111_100_max_changed
+    type: binary
+  - name: vscore111_100_min_changed
+    type: binary
+  - name: _vscore111_100_max_price
+    type: numerical
+  - name: _vscore111_100_min_price
+    type: numerical
+  - name: lightspeed_vscore111_100
+    type: numerical
+  - name: vscore111_200_max
+    type: numerical
+  - name: vscore111_200_min
+    type: numerical
+  - name: vscore111_200_max_price
+    type: numerical
+  - name: vscore111_200_min_price
+    type: numerical
+  - name: vscore111_200_max_changed
+    type: binary
+  - name: vscore111_200_min_changed
+    type: binary
+  - name: _vscore111_200_max_price
+    type: numerical
+  - name: _vscore111_200_min_price
+    type: numerical
+  - name: lightspeed_vscore111_200
+    type: numerical
+  - name: vscore175_50_max
+    type: numerical
+  - name: vscore175_50_min
+    type: numerical
+  - name: vscore175_50_max_price
+    type: numerical
+  - name: vscore175_50_min_price
+    type: numerical
+  - name: vscore175_50_max_changed
+    type: binary
+  - name: vscore175_50_min_changed
+    type: binary
+  - name: _vscore175_50_max_price
+    type: numerical
+  - name: _vscore175_50_min_price
+    type: numerical
+  - name: lightspeed_vscore175_50
+    type: numerical
+  - name: tps175_upper
+    type: numerical
+  - name: tps175_max
+    type: numerical
+  - name: tps175_max_price
+    type: numerical
+  - name: tps175_max_changed
+    type: binary
+  - name: lightspeed_tps175
+    type: numerical
+  - name: vscore175_100_max
+    type: numerical
+  - name: vscore175_100_min
+    type: numerical
+  - name: vscore175_100_max_price
+    type: numerical
+  - name: vscore175_100_min_price
+    type: numerical
+  - name: vscore175_100_max_changed
+    type: binary
+  - name: vscore175_100_min_changed
+    type: binary
+  - name: _vscore175_100_max_price
+    type: numerical
+  - name: _vscore175_100_min_price
+    type: numerical
+  - name: lightspeed_vscore175_100
+    type: numerical
+  - name: vscore175_200_max
+    type: numerical
+  - name: vscore175_200_min
+    type: numerical
+  - name: vscore175_200_max_price
+    type: numerical
+  - name: vscore175_200_min_price
+    type: numerical
+  - name: vscore175_200_max_changed
+    type: binary
+  - name: vscore175_200_min_changed
+    type: binary
+  - name: _vscore175_200_max_price
+    type: numerical
+  - name: _vscore175_200_min_price
+    type: numerical
+  - name: lightspeed_vscore175_200
+    type: numerical
+  - name: vwap48_slope
+    type: numerical
+  - name: slope_buy
+    type: numerical
+  - name: ats
+    type: numerical
+  - name: blackwhale_legacy
+    type: numerical
+  - name: lightwhale_legacy
+    type: numerical
+  - name: ats_ma
+    type: numerical
+  - name: ats_relative_5days
+    type: numerical
+  - name: ats_surge
+    type: numerical
+  - name: qv_dollar
+    type: numerical
+  - name: qv_dollar_relative_5days
+    type: numerical
+  - name: qv_ma
+    type: numerical
+  - name: PSAR
+    type: numerical
+  - name: PSAR_TREND
+    type: numerical
+  - name: MACD_TREND
+    type: numerical
+  - name: atr
+    type: numerical
+  - name: atr_relative_5days
+    type: numerical
+  - name: VaR
+    type: numerical
+  - name: session_vwap_slpc
+    type: numerical
+  - name: session_tpswap_slpc
+    type: numerical
+  - name: vwap175_slpc
+    type: numerical
+  - name: forecasted_tp_sl
+    type: numerical
+  - name: risk_adjusted_buy_position_size_percent
+    type: numerical
+#
+
 
 output_features:
-  - name: Close_next
+  - name: Close_next # you need to add next_ so spicify bro 
     type: numerical
-    column: Close
-    preprocessing:
-      horizon: 2
-
-combiner:
-  type: concat
-  flatten_inputs: true
+    column: Close # also add column name 
 
 model:
-  type: lstm
-  layers:
-    - units: 64
-      activation: relu
-    - units: 32
-      activation: relu
+  model_type: xgboost
+  model_definition:
+    objective: reg:squarederror
+    n_estimators: 100
+    max_depth: 3
+  evaluation_metrics: [r2, mean_squared_error]
 
 training:
-  epochs: 10
+    epochs: 100
+    learning_rate: 0.001
+    batch_size: 32
 
-training_data:
-  file: 'test_data.csv'
-  preprocessing:
-    categorical_features_preprocessing:
-      datetime:
-        missing_value_strategy: fill_with_const
-        fill_value: '1970-01-01 00:00:00'
-    numerical_features_preprocessing:
-      Close:
-        missing_value_strategy: fill_with_const
-        fill_value: 0
+predictions:
+  - output_feature: prediction
 
-output_directory: 'model'
 
-callbacks:
-  - early_stopping:
-      type: improvement
-      metric: val_loss
-      threshold: 0
-      early_stopping_criteria: less
+
+
+preprocessing:
+    missing_value_strategy: fill_with_mean
+    # sample_ratio: 1.0
+    # oversample_minority: null
+    # undersample_majority: null
+    split:
+        type: random
+        probabilities:
+        - 0.7
+        - 0.1
+        - 0.2
