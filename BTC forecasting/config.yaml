@@ -1,0 +1,75 @@
+input_features:
+  -
+    name: timestamp
+    type: date
+  -
+    name: open
+    type: numerical
+  -
+    name: close
+    type: timeseries
+  -
+    name: high
+    type: numerical
+  -
+    name: low
+    type: numerical
+  -
+    name: volume
+    type: numerical
+  -
+    name: close_time
+    type: numerical
+  -
+    name: quote_av
+    type: numerical
+  -
+    name: trades
+    type: numerical
+  -
+    name: tb_base_av
+    type: numerical
+  -
+    name: tb_quote_av
+    type: numerical
+
+output_features:
+  -
+    name: close
+    type: numerical
+
+model:
+  type: xgboost
+  num_boost_round: 100
+  early_stopping_rounds: 10
+
+#preprocessing:
+#  timeseries_length: 10
+#  shift: 1
+#  split_value: 0.8
+#
+#output_directory: results
+#model:
+#  model_type: xgboost
+#  model_definition:
+#    objective: reg:squarederror
+#    n_estimators: 100
+#    max_depth: 3
+#  evaluation_metrics: [r2, mean_squared_error]
+#
+#
+#
+#predictions:
+#  - output_feature: prediction
+
+
+
+
+#model:
+#  type: lstm
+#  num_layers: 2
+#  hidden_size: 128
+#  cell_type: lstm
+#  dropout: 0.2
+#  bidirectional: false
+

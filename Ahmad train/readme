@@ -1,15 +1,26 @@
-ludwig train --config config.yaml --dataset test_data.csv
+ludwig train --config config.yaml --dataset full.csv
 ludwig experiment --dataset test_data.csv --output_directory output
 
 ludwig experiment --data_csv test_data.csv --output_directory output
 
-ludwig predict --dataset <input_dataset> --model_path <model_path> --output_directory <output_directory>
+ludwig visualize --visualization learning_curves --training_statistics "results\experiment_run_0\training_statistics.json"
 
 
-ludwig config --dataset 'C:\Users\crypto\Desktop\ludwig-client\Ahmad train\test_data.csv' --output_directory 'C:\Users\crypto\Desktop\ludwig-client\Ahmad train'
+
+ludwig predict --dataset "test.csv" --model_path "results\experiment_run_13\model" --output_directory "Predict"
+
+
+ludwig config --dataset 'test_data.csv' --output_directory 'C:\Users\crypto\Desktop\ludwig-client\Ahmad train'
 
 
 git push --force origin main
 
 
-> ludwig visualize --visualization learning_curves --training_statistics ratings_sample.meta.json
+> ludwig visualize --visualization learning_curves --training_statistics "results\experiment_run\training_statistics.json"
+
+
+
+ ludwig visualize --visualization learning_curves --training_statistics ratings_sample.meta.json
+
+ # visualizing the training results  
+learning_curves(train_stats_bert, output_feature_name='label', model_names='bert')

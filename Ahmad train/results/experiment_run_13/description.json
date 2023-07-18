@@ -1,6 +1,6 @@
 {
-    "command": "C:\\Users\\crypto\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\ludwig train --config config.yaml --dataset test_data.csv",
-    "commit_hash": "db9576bd008d",
+    "command": "C:\\Users\\crypto\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\ludwig train --config 1.yaml --dataset full.csv",
+    "commit_hash": "598ec4713128",
     "compute": {
         "gpu_type": "NVIDIA GeForce GTX 1070 Ti",
         "gpus_per_node": 2,
@@ -638,49 +638,66 @@
             },
             {
                 "active": true,
-                "column": "Close",
+                "column": "Open",
                 "encoder": {
-                    "activation": "relu",
-                    "bias_initializer": "zeros",
-                    "conv_layers": null,
-                    "dropout": 0.0,
-                    "embedding_size": 256,
-                    "embeddings_on_cpu": false,
-                    "embeddings_trainable": true,
-                    "fc_layers": null,
-                    "filter_size": 3,
-                    "max_sequence_length": null,
-                    "norm": null,
-                    "norm_params": null,
-                    "num_conv_layers": null,
-                    "num_fc_layers": null,
-                    "num_filters": 256,
-                    "output_size": 256,
-                    "pool_function": "max",
-                    "pool_size": null,
-                    "pretrained_embeddings": null,
-                    "reduce_output": "sum",
-                    "representation": "dense",
-                    "should_embed": true,
                     "skip": false,
-                    "type": "parallel_cnn",
-                    "use_bias": true,
-                    "vocab": null,
-                    "weights_initializer": "xavier_uniform"
+                    "type": "passthrough"
                 },
-                "name": "Close",
+                "name": "Open",
                 "preprocessing": {
-                    "computed_fill_value": "",
-                    "fill_value": "",
+                    "computed_fill_value": 0.0,
+                    "computed_outlier_fill_value": 0.0,
+                    "fill_value": 0.0,
                     "missing_value_strategy": "fill_with_const",
-                    "padding": "right",
-                    "padding_value": 0.0,
-                    "timeseries_length_limit": 256,
-                    "tokenizer": "space"
+                    "normalization": "zscore",
+                    "outlier_strategy": null,
+                    "outlier_threshold": 3.0
                 },
-                "proc_column": "Close_1JOJxG",
+                "proc_column": "Open_sMoadH",
                 "tied": null,
-                "type": "timeseries"
+                "type": "number"
+            },
+            {
+                "active": true,
+                "column": "High",
+                "encoder": {
+                    "skip": false,
+                    "type": "passthrough"
+                },
+                "name": "High",
+                "preprocessing": {
+                    "computed_fill_value": 0.0,
+                    "computed_outlier_fill_value": 0.0,
+                    "fill_value": 0.0,
+                    "missing_value_strategy": "fill_with_const",
+                    "normalization": "zscore",
+                    "outlier_strategy": null,
+                    "outlier_threshold": 3.0
+                },
+                "proc_column": "High_sMoadH",
+                "tied": null,
+                "type": "number"
+            },
+            {
+                "active": true,
+                "column": "Low",
+                "encoder": {
+                    "skip": false,
+                    "type": "passthrough"
+                },
+                "name": "Low",
+                "preprocessing": {
+                    "computed_fill_value": 0.0,
+                    "computed_outlier_fill_value": 0.0,
+                    "fill_value": 0.0,
+                    "missing_value_strategy": "fill_with_const",
+                    "normalization": "zscore",
+                    "outlier_strategy": null,
+                    "outlier_threshold": 3.0
+                },
+                "proc_column": "Low_sMoadH",
+                "tied": null,
+                "type": "number"
             }
         ],
         "ludwig_version": "0.7.4",
@@ -714,7 +731,7 @@
                     "type": "mean_squared_error",
                     "weight": 1.0
                 },
-                "name": "Close_next",
+                "name": "close_next",
                 "num_classes": null,
                 "preprocessing": {
                     "computed_fill_value": 0.0,
@@ -725,7 +742,7 @@
                     "outlier_strategy": null,
                     "outlier_threshold": 3.0
                 },
-                "proc_column": "Close_next_VO1XAD",
+                "proc_column": "close_next_VO1XAD",
                 "reduce_dependencies": "sum",
                 "reduce_input": "sum",
                 "type": "number"
@@ -745,12 +762,12 @@
             "undersample_majority": null
         },
         "trainer": {
-            "batch_size": "auto",
+            "batch_size": 32,
             "bucketing_field": null,
             "checkpoints_per_epoch": 0,
             "compile": false,
             "early_stop": 5,
-            "epochs": 10,
+            "epochs": 100,
             "eval_batch_size": null,
             "evaluate_training_set": false,
             "gradient_clipping": {
@@ -795,12 +812,12 @@
             "steps_per_checkpoint": 0,
             "train_steps": null,
             "use_mixed_precision": false,
-            "validation_field": "Close_next",
+            "validation_field": "close_next",
             "validation_metric": "mean_squared_error"
         }
     },
     "data_format": "csv",
-    "dataset": "test_data.csv",
+    "dataset": "full.csv",
     "ludwig_version": "0.7.4",
     "random_seed": 42,
     "torch_version": "2.0.1+cu117"

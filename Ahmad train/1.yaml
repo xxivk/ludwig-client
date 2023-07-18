@@ -1,0 +1,54 @@
+#input_features:
+#- name: DateIndex
+#  type: date
+#  format: 'yyyy-MM-dd HH:mm:ss'
+#encoder:
+##type: timeseries
+#feature_extraction: lstm
+
+#- name: DateIndex
+#  type: date
+#  format: 'yyyy-MM-dd HH:mm:ss'
+#- name: Open
+#  type: numerical
+#- name: High
+#  type: numerical
+#- name: Low
+#  type: numerical
+
+input_features:
+  -
+    name: Date
+    type: date
+    preprocessing:
+      date_format: "%Y-%m-%d"
+  -
+    name: Open
+    type: numerical
+  -
+    name: High
+    type: numerical
+  -
+    name: Low
+    type: numerical
+  -
+    name: Volume
+    type: numerical
+
+output_features:
+  -
+    name: Close
+    type: numerical
+
+model:
+  type: lstm
+  num_layers: 2
+  hidden_size: 128
+  cell_type: lstm
+  dropout: 0.2
+  bidirectional: false
+
+training:
+  epochs: 50
+  learning_rate: 0.001
+  batch_size: 32

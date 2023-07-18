@@ -1,0 +1,13 @@
+{
+    "close": {
+        "loss": 576956224.0,
+        "mean_absolute_error": 17672.505859375,
+        "mean_squared_error": 576956224.0,
+        "r2": -1.1791672706604004,
+        "root_mean_squared_error": 24019.912109375,
+        "root_mean_squared_percentage_error": 0.8093512654304504
+    },
+    "combined": {
+        "loss": 617637440.0
+    }
+}

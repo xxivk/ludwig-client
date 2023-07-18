@@ -1,0 +1,141 @@
+{
+    "checksum": "1EJnGoAU1eKS37ucnyPQuw==",
+    "close": {
+        "preprocessing": {
+            "computed_fill_value": 0.0,
+            "computed_outlier_fill_value": 0.0,
+            "fill_value": 0.0,
+            "missing_value_strategy": "drop_row",
+            "normalization": null,
+            "outlier_strategy": null,
+            "outlier_threshold": 3.0
+        }
+    },
+    "close_time": {
+        "mean": 1595802648576.0,
+        "preprocessing": {
+            "computed_fill_value": 0.0,
+            "computed_outlier_fill_value": 0.0,
+            "fill_value": 0.0,
+            "missing_value_strategy": "fill_with_const",
+            "normalization": "zscore",
+            "outlier_strategy": null,
+            "outlier_threshold": 3.0
+        },
+        "std": 53542072320.0
+    },
+    "data_train_hdf5_fp": "train1h.training.hdf5",
+    "dataset_src": "train1h.csv",
+    "high": {
+        "mean": 20066.482421875,
+        "preprocessing": {
+            "computed_fill_value": 0.0,
+            "computed_outlier_fill_value": 0.0,
+            "fill_value": 0.0,
+            "missing_value_strategy": "fill_with_const",
+            "normalization": "zscore",
+            "outlier_strategy": null,
+            "outlier_threshold": 3.0
+        },
+        "std": 16214.12890625
+    },
+    "low": {
+        "mean": 19841.421875,
+        "preprocessing": {
+            "computed_fill_value": 0.0,
+            "computed_outlier_fill_value": 0.0,
+            "fill_value": 0.0,
+            "missing_value_strategy": "fill_with_const",
+            "normalization": "zscore",
+            "outlier_strategy": null,
+            "outlier_threshold": 3.0
+        },
+        "std": 16029.439453125
+    },
+    "open": {
+        "mean": 19957.3125,
+        "preprocessing": {
+            "computed_fill_value": 0.0,
+            "computed_outlier_fill_value": 0.0,
+            "fill_value": 0.0,
+            "missing_value_strategy": "fill_with_const",
+            "normalization": "zscore",
+            "outlier_strategy": null,
+            "outlier_threshold": 3.0
+        },
+        "std": 16124.3876953125
+    },
+    "quote_av": {
+        "mean": 69773152.0,
+        "preprocessing": {
+            "computed_fill_value": 0.0,
+            "computed_outlier_fill_value": 0.0,
+            "fill_value": 0.0,
+            "missing_value_strategy": "fill_with_const",
+            "normalization": "zscore",
+            "outlier_strategy": null,
+            "outlier_threshold": 3.0
+        },
+        "std": 107386984.0
+    },
+    "tb_base_av": {
+        "mean": 1592.438720703125,
+        "preprocessing": {
+            "computed_fill_value": 0.0,
+            "computed_outlier_fill_value": 0.0,
+            "fill_value": 0.0,
+            "missing_value_strategy": "fill_with_const",
+            "normalization": "zscore",
+            "outlier_strategy": null,
+            "outlier_threshold": 3.0
+        },
+        "std": 2225.223876953125
+    },
+    "tb_quote_av": {
+        "mean": 34582816.0,
+        "preprocessing": {
+            "computed_fill_value": 0.0,
+            "computed_outlier_fill_value": 0.0,
+            "fill_value": 0.0,
+            "missing_value_strategy": "fill_with_const",
+            "normalization": "zscore",
+            "outlier_strategy": null,
+            "outlier_threshold": 3.0
+        },
+        "std": 53392388.0
+    },
+    "timestamp": {
+        "preprocessing": {
+            "computed_fill_value": "",
+            "datetime_format": null,
+            "fill_value": "",
+            "missing_value_strategy": "fill_with_const"
+        }
+    },
+    "trades": {
+        "mean": 61526.6796875,
+        "preprocessing": {
+            "computed_fill_value": 0.0,
+            "computed_outlier_fill_value": 0.0,
+            "fill_value": 0.0,
+            "missing_value_strategy": "fill_with_const",
+            "normalization": "zscore",
+            "outlier_strategy": null,
+            "outlier_threshold": 3.0
+        },
+        "std": 95586.328125
+    },
+    "volume": {
+        "mean": 3199.992431640625,
+        "preprocessing": {
+            "computed_fill_value": 0.0,
+            "computed_outlier_fill_value": 0.0,
+            "fill_value": 0.0,
+            "missing_value_strategy": "fill_with_const",
+            "normalization": "zscore",
+            "outlier_strategy": null,
+            "outlier_threshold": 3.0
+        },
+        "std": 4472.1611328125
+    }
+}

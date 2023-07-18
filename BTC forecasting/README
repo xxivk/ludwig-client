@@ -1,0 +1,14 @@
+
+
+ludwig train --dataset train1h.csv --config config.yaml
+
+ludwig experiment --dataset "train_data.csv" --config "config.yaml" 
+
+
+ludwig evaluate --model path/to/trained/model --dataset heldout.csv
+
+
+ludwig visualize --visualization compare_performance --test_statistics path/to/test_statistics_model_1.json path/to/test_statistics_model_2.json
+
+
+ludwig predict  --dataset "train_data.csv" --model_path results\experiment_run_2\model --output_directory "Predict"

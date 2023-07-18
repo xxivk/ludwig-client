@@ -631,50 +631,72 @@
         },
         {
             "active": true,
-            "column": "Close",
+            "column": "Open",
             "encoder": {
-                "activation": "relu",
-                "bias_initializer": "zeros",
-                "conv_layers": null,
-                "dropout": 0.0,
-                "embedding_size": 1,
-                "embeddings_on_cpu": false,
-                "embeddings_trainable": true,
-                "fc_layers": null,
-                "filter_size": 3,
-                "max_sequence_length": 1,
-                "norm": null,
-                "norm_params": null,
-                "num_conv_layers": null,
-                "num_fc_layers": null,
-                "num_filters": 256,
-                "output_size": 256,
-                "pool_function": "max",
-                "pool_size": null,
-                "pretrained_embeddings": null,
-                "reduce_output": "sum",
-                "representation": "dense",
+                "input_size": 1,
                 "saved_weights_in_checkpoint": true,
-                "should_embed": false,
                 "skip": false,
-                "type": "parallel_cnn",
-                "use_bias": true,
-                "vocab": null,
-                "weights_initializer": "xavier_uniform"
+                "type": "passthrough"
             },
-            "name": "Close",
+            "name": "Open",
             "preprocessing": {
-                "computed_fill_value": "",
-                "fill_value": "",
+                "computed_fill_value": 0.0,
+                "computed_outlier_fill_value": 0.0,
+                "fill_value": 0.0,
                 "missing_value_strategy": "fill_with_const",
-                "padding": "right",
-                "padding_value": 0.0,
-                "timeseries_length_limit": 256,
-                "tokenizer": "space"
+                "normalization": "zscore",
+                "outlier_strategy": null,
+                "outlier_threshold": 3.0
             },
-            "proc_column": "Close_1JOJxG",
+            "proc_column": "Open_sMoadH",
             "tied": null,
-            "type": "timeseries"
+            "type": "number"
+        },
+        {
+            "active": true,
+            "column": "High",
+            "encoder": {
+                "input_size": 1,
+                "saved_weights_in_checkpoint": true,
+                "skip": false,
+                "type": "passthrough"
+            },
+            "name": "High",
+            "preprocessing": {
+                "computed_fill_value": 0.0,
+                "computed_outlier_fill_value": 0.0,
+                "fill_value": 0.0,
+                "missing_value_strategy": "fill_with_const",
+                "normalization": "zscore",
+                "outlier_strategy": null,
+                "outlier_threshold": 3.0
+            },
+            "proc_column": "High_sMoadH",
+            "tied": null,
+            "type": "number"
+        },
+        {
+            "active": true,
+            "column": "Low",
+            "encoder": {
+                "input_size": 1,
+                "saved_weights_in_checkpoint": true,
+                "skip": false,
+                "type": "passthrough"
+            },
+            "name": "Low",
+            "preprocessing": {
+                "computed_fill_value": 0.0,
+                "computed_outlier_fill_value": 0.0,
+                "fill_value": 0.0,
+                "missing_value_strategy": "fill_with_const",
+                "normalization": "zscore",
+                "outlier_strategy": null,
+                "outlier_threshold": 3.0
+            },
+            "proc_column": "Low_sMoadH",
+            "tied": null,
+            "type": "number"
         }
     ],
     "ludwig_version": "0.7.4",
@@ -695,7 +717,7 @@
                 "fc_output_size": 256,
                 "fc_use_bias": true,
                 "fc_weights_initializer": "xavier_uniform",
-                "input_size": 325,
+                "input_size": 72,
                 "num_fc_layers": 0,
                 "type": "regressor",
                 "use_bias": true,
@@ -703,12 +725,12 @@
             },
             "default_validation_metric": "mean_squared_error",
             "dependencies": [],
-            "input_size": 325,
+            "input_size": 72,
             "loss": {
                 "type": "mean_squared_error",
                 "weight": 1.0
             },
-            "name": "Close_next",
+            "name": "close_next",
             "num_classes": null,
             "preprocessing": {
                 "computed_fill_value": 0.0,
@@ -719,7 +741,7 @@
                 "outlier_strategy": null,
                 "outlier_threshold": 3.0
             },
-            "proc_column": "Close_next_VO1XAD",
+            "proc_column": "close_next_VO1XAD",
             "reduce_dependencies": "sum",
             "reduce_input": "sum",
             "type": "number"
@@ -739,13 +761,13 @@
         "undersample_majority": null
     },
     "trainer": {
-        "batch_size": 512,
+        "batch_size": 32,
         "bucketing_field": null,
         "checkpoints_per_epoch": 0,
         "compile": false,
         "early_stop": 5,
-        "epochs": 10,
-        "eval_batch_size": 512,
+        "epochs": 100,
+        "eval_batch_size": null,
         "evaluate_training_set": false,
         "gradient_clipping": {
             "clipglobalnorm": 0.5,
@@ -789,7 +811,7 @@
         "steps_per_checkpoint": 0,
         "train_steps": null,
         "use_mixed_precision": false,
-        "validation_field": "Close_next",
+        "validation_field": "close_next",
         "validation_metric": "mean_squared_error"
     }
 }

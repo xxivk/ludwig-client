@@ -1,15 +1,20 @@
 input_features:
-  - name: DateIndex
+  - name: datetime
     type: date
-    format: 'yyyy-MM-dd HH:mm:ss'
-
-  - name: Close
+   # format: '%m/%d/%Y %H:%M'
+  - name: Seattle
     type: timeseries
+    preprocessing:
+      window_size: 10
+    #encoder:
+    #  type: passthrough
+    #  input_shape: [45253]  # Adjust the shape based on your actual input data
+
 
 output_features:
-  - name: Close_next
+  - name: Seattle_next
     type: numerical
-    column: Close
+    column: Seattle
     preprocessing:
       horizon: 2
 
@@ -17,17 +22,12 @@ combiner:
   type: concat
   flatten_inputs: true
 
-training:
-  epochs: 10
+#preprocessing:
+#  split:
+#    type: datetime
+#    column: datetime
 
-training_data:
-  file: 'preprocessed_data.csv'
-  preprocessing:
-    categorical_features_preprocessing:
-      datetime:
-        missing_value_strategy: fill_with_const
-        fill_value: '1970-01-01 00:00:00'
-    numerical_features_preprocessing:
-      Seattle:
-        missing_value_strategy: fill_with_const
-        fill_value: 0
+training:
+  batch_size: 16
+  epochs: 50
+  early_stop: 5

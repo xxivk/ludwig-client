@@ -1,0 +1,42 @@
+input_features:
+  -
+    name: timestamp
+    type: date
+  -
+    name: open
+    type: numerical
+  -
+    name: high
+    type: numerical
+  -
+    name: low
+    type: numerical
+  -
+    name: close
+    type: numerical
+  -
+    name: volume
+    type: numerical
+  -
+    name: close_time
+    type: numerical
+  -
+    name: quote_av
+    type: numerical
+  -
+    name: trades
+    type: numerical
+  -
+    name: tb_base_av
+    type: numerical
+  -
+    name: tb_quote_av
+    type: numerical
+
+output_features:
+  -
+    name: close
+    type: numerical
+
+split:
+    test_size: 0.2
